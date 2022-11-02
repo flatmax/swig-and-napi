@@ -57,7 +57,7 @@ libSwigCNodejs_la_SOURCES = swigCNodejs_wrap.cxx
 libSwigCNodejs_la_CPPFLAGS =  $(nodejs_CPPFLAGS) $(GTKIOSTREAM_CFLAGS) $(NAPI_CFLAGS)
 libSwigCNodejs_la_LDFLAGS = $(nodejs_LDFLAGS) $(top_builddir)/src/libSwigCNodejs.la $(GTKIOSTREAM_LIBS)
 
-libNapiNodejs_la_SOURCES = NativeCode.C
+libNapiNodejs_la_SOURCES = NapiCode.C
 libNapiNodejs_la_CPPFLAGS =  $(nodejs_CPPFLAGS) $(NAPI_CFLAGS)
 libNapiNodejs_la_LDFLAGS = $(nodejs_LDFLAGS)
 
