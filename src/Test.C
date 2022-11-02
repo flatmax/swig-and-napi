@@ -29,10 +29,20 @@
 #include "Test.H"
 #include <stdio.h>
 
+#include <unistd.h>
+
 Test::Test(){
   printf("Test constructed\n");
 }
 
 Test::~Test(){
   printf("Test destructed\n");
+}
+
+void *Test::threadMain(void){
+    while (1){
+      sleep(1);
+      printf("hi again\n");
+    }
+    return NULL;
 }

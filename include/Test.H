@@ -29,13 +29,15 @@
 #ifndef TEST_H_
 #define TEST_H_
 
+#include <Thread.H>
+
 /** Class to test the wasm setup
 */
-class Test {
-#ifdef SWIG_V8_VERSION
-public:
-  v8::Persistent<v8::Function> theFunction;
-#endif
+class Test : public ThreadedMethod {
+
+  /** This is the thread's main
+  */
+  void *threadMain(void);
 
 public:
   /** Constructor
