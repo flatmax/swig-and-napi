@@ -58,6 +58,11 @@ fi
 AM_CONDITIONAL([HAVE_DOXYGEN],[test -n "$DOXYGEN"])
 AM_COND_IF([HAVE_DOXYGEN], [AC_CONFIG_FILES([api/Doxyfile])])
 
+# gtkiostream
+PKG_CHECK_MODULES([GTKIOSTREAM], [gtkIOStream],,  AC_MSG_ERROR("gtkiostream is required for building this code"))
+AC_SUBST([GTKIOSTREAM_CFLAGS])
+AC_SUBST([GTKIOSTREAM_LIBS])
+
 # check for emscripten compilation
 m4_ifdef([AM_EMSCRIPTEN], [AM_EMSCRIPTEN])
 AM_CONDITIONAL(HAVE_EMSCRIPTEN, test x$emscripten_compiler = xyes)

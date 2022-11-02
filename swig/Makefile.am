@@ -52,8 +52,8 @@ swigCNodejs_wrap.cxx: ../include/Test.H
 endif
 
 libSwigCNodejs_la_SOURCES = swigCNodejs_wrap.cxx
-libSwigCNodejs_la_CPPFLAGS =  $(nodejs_CPPFLAGS)
-libSwigCNodejs_la_LDFLAGS = $(nodejs_LDFLAGS) $(top_builddir)/src/libSwigCNodejs.la
+libSwigCNodejs_la_CPPFLAGS =  $(nodejs_CPPFLAGS) $(GTKIOSTREAM_CFLAGS)
+libSwigCNodejs_la_LDFLAGS = $(nodejs_LDFLAGS) $(top_builddir)/src/libSwigCNodejs.la $(GTKIOSTREAM_LIBS)
 
 all: $(lib_LTLIBRARIES)
 	if [ -e .libs/libSwigCNodejs.so ]; then cp -H .libs/libSwigCNodejs.so .libs/libSwigCNodejs.node; fi
