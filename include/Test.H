@@ -47,6 +47,11 @@ public:
   /** Destructor
   */
   virtual ~Test();
+
+  /** Set the Napi function pointer for us to call
+  \param s The function pointer as a string
+  */
+  void setFnPointer(const char* s);
 };
 
 #endif // TEST_H_

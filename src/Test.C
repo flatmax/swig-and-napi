@@ -27,9 +27,20 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "Test.H"
+#include <napi.h>
+
 #include <stdio.h>
 
 #include <unistd.h>
+#include <chrono>
+
+Napi::ThreadSafeFunction *tsfn; ///< The node api's threadsafe function
+
+void Test::setFnPointer(const char* s){
+  printf("%s : d = %s\n",__func__, s);
+  sscanf(s, "%p", &tsfn);
+  printf("%s : p = %p\n",__func__, tsfn);
+}
 
 Test::Test(){
   printf("Test constructed\n");
@@ -40,9 +51,27 @@ Test::~Test(){
 }
 
 void *Test::threadMain(void){
-    for (int i=0; i<2; i++){
+    auto callback = []( Napi::Env env, Napi::Function jsCallback, int* value ) {
+      // Transform native data into JS data, passing it to the provided
+      // `jsCallback` -- the TSFN's JavaScript function.
+      jsCallback.Call( {Napi::Number::New( env, *value )} );
+        // We're finished with the data.
+        delete value;
+    };
+
+    int iA=4;
+    for (int i=0; i<iA; i++){
       sleep(1);
-      printf("hi again\n");
+      printf("thread loop %d of %d\n",i,iA);
+      if (*tsfn) {
+        printf("calling tsfn->BlockingCall\n");
+        int* value = new int( clock() );
+        napi_status status = tsfn->BlockingCall( value, callback );
+        if ( status != napi_ok ) { // Handle error
+          printf("napi error : breaking\n");
+          break;
+        }
+      }
     }
     return NULL;
 }
