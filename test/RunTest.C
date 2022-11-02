@@ -33,10 +33,6 @@ int main(int argc, char *argv[]){
   Test test; // test the construction and destruction of the Test class.
   test.run();
 
-  sleep(3);
-  test.stop();
-  printf("%d\n",__LINE__);
   test.meetThread();
-  printf("%d\n",__LINE__);
   return 0;
 }

@@ -40,7 +40,7 @@ Test::~Test(){
 }
 
 void *Test::threadMain(void){
-    while (1){
+    for (int i=0; i<2; i++){
       sleep(1);
       printf("hi again\n");
     }
