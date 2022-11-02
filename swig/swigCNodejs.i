@@ -28,8 +28,10 @@
 
 %module "swigCNodejs"
 %{
+#include <Thread.H>
 #include "Test.H"
 %}
 
 %include "std_string.i"
+%include <Thread.H>
 %include "Test.H"

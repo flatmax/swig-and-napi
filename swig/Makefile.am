@@ -36,8 +36,10 @@ nodejs_CPPFLAGS += -I$(top_srcdir)/include
 nodejs_LDFLAGS = -version-info $(LT_CURRENT) -rpath=. -rdynamic -Bstatic -export-dynamic
 nodejs_LDFLAGS +=
 
+gtkiostreamARG = $(subst -pthread,,$(GTKIOSTREAM_CFLAGS))
+
 %_wrap.cxx: %.i
-	$(SWIG_PATH)swig $(SWIG_INCLUDE_PATH) -I../include -c++ -javascript -node $<
+	$(SWIG_PATH)swig $(SWIG_INCLUDE_PATH) $(gtkiostreamARG) -I../include -c++ -javascript -node $<
 
 BUILT_SOURCES =
 CLEANFILES = Makefile.in
