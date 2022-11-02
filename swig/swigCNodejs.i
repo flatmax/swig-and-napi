@@ -33,33 +33,3 @@
 
 %include "std_string.i"
 %include "Test.H"
-
-%extend Test {
-
-  void setCallback(const std::string& fnName){
-    v8::Isolate* isolate = v8::Isolate::GetCurrent();
-
-    SWIGV8_VALUE fnObj = SWIGV8_CURRENT_CONTEXT()->Global()->Get(SWIGV8_CURRENT_CONTEXT(), SWIGV8_STRING_NEW(fnName.c_str())).ToLocalChecked();
-
-    if (!fnObj->IsFunction()){
-      printf("setupCallback : error no function found\n");
-      return;
-    } else
-      printf("setupCallback : %s function found\n", fnName.c_str());
-
-    v8::Local<v8::Function> func = v8::Local<v8::Function>::Cast(fnObj);
-    self->theFunction.Reset(isolate, func);
-  }
-
-  void callCallback(){
-    v8::Local<v8::Function> func = v8::Local<v8::Function>::New(v8::Isolate::GetCurrent(), self->theFunction);
-    if (!func.IsEmpty()) {
-      const unsigned argc = 1;
-      SWIGV8_VALUE argv[argc] = { SWIGV8_STRING_NEW("hello world") };
-      func->Call(SWIGV8_CURRENT_CONTEXT(), func, argc, argv);
-     } else {
-      printf("Couldn't find a valid function, call setCallback first.\n");
-     }
-  }
-
-}
