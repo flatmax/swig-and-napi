@@ -95,6 +95,15 @@ AC_ARG_WITH([swig-include-path],
 [SWIG_INCLUDE_PATH="-I/usr/include"])
 AC_SUBST(SWIG_INCLUDE_PATH)
 
+hc_error=no
+NAPI_CFLAGS="/usr/local/include/node-addon-api"
+AC_CHECK_FILE( [$NAPI_CFLAGS/napi.h],      [], [ AC_MSG_RESULT( [ERROR: $NAPI_CFLAGS/napi.h required.]      ); hc_error=yes ] )
+if test "$hc_error" != "no"; then
+    AC_MSG_ERROR( [Please correct the above error(s) and try again] )
+fi
+NAPI_CFLAGS="-I$NAPI_CFLAGS"
+AC_SUBST(NAPI_CFLAGS)
+
 AC_C_INLINE
 AC_FUNC_ERROR_AT_LINE
 

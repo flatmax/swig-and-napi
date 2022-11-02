@@ -29,5 +29,5 @@
 lib_LTLIBRARIES = libSwigCNodejs.la
 
 libSwigCNodejs_la_SOURCES = Test.C
-libSwigCNodejs_la_CPPFLAGS = -I$(top_srcdir)/include $(GTKIOSTREAM_CFLAGS)
+libSwigCNodejs_la_CPPFLAGS = -I$(top_srcdir)/include $(GTKIOSTREAM_CFLAGS) $(NAPI_CFLAGS) $(NODE_CFLAGS)
 libSwigCNodejs_la_LDFLAGS =  -version-info $(LT_CURRENT) -release $(LT_RELEASE) $(GTKIOSTREAM_LIBS)

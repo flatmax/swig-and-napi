@@ -29,5 +29,5 @@
 noinst_PROGRAMS = RunTest
 
 RunTest_SOURCES = RunTest.C
-RunTest_CPPFLAGS = -I$(top_srcdir)/include $(GTKIOSTREAM_CFLAGS)
-RunTest_LDADD =  $(top_builddir)/src/libSwigCNodejs.la $(GTKIOSTREAM_LIBS)
+RunTest_CPPFLAGS = -I$(top_srcdir)/include $(GTKIOSTREAM_CFLAGS) $(NAPI_CFLAGS) $(NODE_CFLAGS)
+RunTest_LDADD =  $(top_builddir)/src/libSwigCNodejs.la $(GTKIOSTREAM_LIBS) -lnode

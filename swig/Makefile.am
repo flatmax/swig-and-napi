@@ -47,15 +47,20 @@ CLEANFILES = Makefile.in
 lib_LTLIBRARIES =
 
 if HAVE_LIBNODE
-lib_LTLIBRARIES += libSwigCNodejs.la
+lib_LTLIBRARIES += libSwigCNodejs.la libNapiNodejs.la
 BUILT_SOURCES += swigCNodejs_wrap.cxx
 CLEANFILES += swigCNodejs_wrap.cxx
 swigCNodejs_wrap.cxx: ../include/Test.H
 endif
 
 libSwigCNodejs_la_SOURCES = swigCNodejs_wrap.cxx
-libSwigCNodejs_la_CPPFLAGS =  $(nodejs_CPPFLAGS) $(GTKIOSTREAM_CFLAGS)
+libSwigCNodejs_la_CPPFLAGS =  $(nodejs_CPPFLAGS) $(GTKIOSTREAM_CFLAGS) $(NAPI_CFLAGS)
 libSwigCNodejs_la_LDFLAGS = $(nodejs_LDFLAGS) $(top_builddir)/src/libSwigCNodejs.la $(GTKIOSTREAM_LIBS)
+
+libNapiNodejs_la_SOURCES = NativeCode.C
+libNapiNodejs_la_CPPFLAGS =  $(nodejs_CPPFLAGS) $(NAPI_CFLAGS)
+libNapiNodejs_la_LDFLAGS = $(nodejs_LDFLAGS)
 
 all: $(lib_LTLIBRARIES)
 	if [ -e .libs/libSwigCNodejs.so ]; then cp -H .libs/libSwigCNodejs.so .libs/libSwigCNodejs.node; fi
+	if [ -e .libs/libNapiNodejs.so ]; then cp -H .libs/libNapiNodejs.so .libs/libNapiNodejs.node; fi
