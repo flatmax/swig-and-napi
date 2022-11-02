@@ -51,6 +51,7 @@ Test::~Test(){
 }
 
 void *Test::threadMain(void){
+    printf("C++ Thread enter %s\n",__func__);
     auto callback = []( Napi::Env env, Napi::Function jsCallback, int* value ) {
       // Transform native data into JS data, passing it to the provided
       // `jsCallback` -- the TSFN's JavaScript function.
@@ -73,5 +74,6 @@ void *Test::threadMain(void){
         }
       }
     }
+    printf("C++ Thread exit %s\n",__func__);
     return NULL;
 }
