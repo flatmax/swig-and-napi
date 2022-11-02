@@ -18,9 +18,6 @@ Napi::Value Start( const Napi::CallbackInfo& info ){
     0,                       // Unlimited queue
     1);                       // Only one thread will use this initially
 
-  // Release the thread-safe function
-  tsfn.Release();
-
   // return the tsfn as a pointer in a string
   char addr[24];
   sprintf(addr,"%p",&tsfn);

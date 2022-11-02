@@ -74,6 +74,7 @@ void *Test::threadMain(void){
         }
       }
     }
+    tsfn->Release();
     printf("C++ Thread exit %s\n",__func__);
     return NULL;
 }
