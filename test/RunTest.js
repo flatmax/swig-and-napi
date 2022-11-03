@@ -15,11 +15,8 @@ test.setFnPointer(fp); // tell swig the callback function pointer to execute
 test.run(); // run the C++ thread in the SWIG module
 
 const id = setInterval(()=>{
-  if (!test.running()){
-    console.log('not running')
+  if (!test.running())
     clearInterval(id);
-  } else
-    console.log('running')
 },1000);
 
 // in the main thread, print out main every second
