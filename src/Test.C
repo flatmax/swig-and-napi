@@ -60,10 +60,10 @@ void *Test::threadMain(void){
         delete value;
     };
 
-    int iA=4;
+    int iA=10;
     for (int i=0; i<iA; i++){
       sleep(1);
-      printf("thread loop %d of %d\n",i,iA);
+      printf("thread loop %d of %d\n",i,iA-1);
       if (*tsfn) {
         printf("calling tsfn->BlockingCall\n");
         int* value = new int( clock() );
